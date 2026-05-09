@@ -56,11 +56,14 @@ const MainApp = () => {
     try {
       setIsDownloading(true);
       const canvas = await html2canvas(element, {
-        scale: 6,
+        scale: 4, // Scale 4 is usually enough and more stable
         useCORS: true,
         logging: false,
         allowTaint: true,
         backgroundColor: '#ffffff',
+        width: 794, // 210mm at 96dpi
+        height: 1123, // 297mm at 96dpi
+        windowWidth: 794,
         onclone: (clonedDoc) => {
           const clonedElement = clonedDoc.getElementById('resume-pdf-source')?.firstElementChild;
           if (clonedElement) {
@@ -982,8 +985,8 @@ const MainApp = () => {
       </main>
       
       {/* Hidden container for PDF generation - always in DOM */}
-      <div id="pdf-gen-container" style={{ position: 'absolute', left: '-9999px', top: '0', zIndex: -1 }}>
-        <div id="resume-pdf-source">
+      <div id="pdf-gen-container" style={{ position: 'absolute', left: '-9999px', top: '0', zIndex: -1, width: '210mm' }}>
+        <div id="resume-pdf-source" style={{ width: '210mm' }}>
           {selectedTemplate === 'JakeRyan' && <JakeRyanTemplate data={resumeData} />}
           {selectedTemplate === 'Harishbar' && <HarishbarTemplate data={resumeData} />}
           {selectedTemplate === 'AutoCV' && <AutoCVTemplate data={resumeData} />}
