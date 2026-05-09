@@ -471,7 +471,7 @@ const MainApp = () => {
               {downloadStatus === 'error' && (
                 <>
                   <div className="status-icon error">!</div>
-                  <span>Generation failed. Please try again.</span>
+                  <span>Switch to Preview Mode to Download</span>
                 </>
               )}
             </div>
