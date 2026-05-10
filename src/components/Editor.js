@@ -49,6 +49,25 @@ const Editor = ({ mobileTab, setMobileTab }) => {
 
   const personalSection = (
     <Section key="personal" id="personal" title="Personal Information" icon={User} {...sectionProps}>
+      {selectedTemplate === 'OmkarPrabhu' && (
+        <div className="input-group">
+          <label>Profile Picture</label>
+          <input 
+            type="file" 
+            accept="image/*"
+            onChange={(e) => {
+              const file = e.target.files[0];
+              if (file) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                  updatePersonalInfo({ profileImage: reader.result });
+                };
+                reader.readAsDataURL(file);
+              }
+            }}
+          />
+        </div>
+      )}
       <div className="input-group">
         <label>Full Name</label>
         <input 
@@ -132,7 +151,7 @@ const Editor = ({ mobileTab, setMobileTab }) => {
               value={edu.school} 
               onChange={(e) => {
                 const newEdu = [...resumeData.education];
-                newEdu[index].school = e.target.value;
+                newEdu[index] = { ...newEdu[index], school: e.target.value };
                 updateEducation(newEdu);
               }}
             />
@@ -144,7 +163,7 @@ const Editor = ({ mobileTab, setMobileTab }) => {
               value={edu.degree} 
               onChange={(e) => {
                 const newEdu = [...resumeData.education];
-                newEdu[index].degree = e.target.value;
+                newEdu[index] = { ...newEdu[index], degree: e.target.value };
                 updateEducation(newEdu);
               }}
             />
@@ -157,7 +176,7 @@ const Editor = ({ mobileTab, setMobileTab }) => {
                 value={edu.location} 
                 onChange={(e) => {
                   const newEdu = [...resumeData.education];
-                  newEdu[index].location = e.target.value;
+                  newEdu[index] = { ...newEdu[index], location: e.target.value };
                   updateEducation(newEdu);
                 }}
               />
@@ -169,11 +188,24 @@ const Editor = ({ mobileTab, setMobileTab }) => {
                 value={edu.date} 
                 onChange={(e) => {
                   const newEdu = [...resumeData.education];
-                  newEdu[index].date = e.target.value;
+                  newEdu[index] = { ...newEdu[index], date: e.target.value };
                   updateEducation(newEdu);
                 }}
               />
             </div>
+          </div>
+          <div className="input-group">
+            <label>GPA / Percentage</label>
+            <input 
+              type="text" 
+              value={edu.gpa || ''} 
+              onChange={(e) => {
+                const newEdu = [...resumeData.education];
+                newEdu[index] = { ...newEdu[index], gpa: e.target.value };
+                updateEducation(newEdu);
+              }}
+              placeholder="e.g. 3.8/4.0 or 95%"
+            />
           </div>
                     <button 
             className="delete-btn"
@@ -185,7 +217,7 @@ const Editor = ({ mobileTab, setMobileTab }) => {
       ))}
       <button 
         className="add-btn"
-        onClick={() => updateEducation([...resumeData.education, { school: '', location: '', degree: '', date: '' }])}
+        onClick={() => updateEducation([...resumeData.education, { school: '', location: '', degree: '', date: '', gpa: '' }])}
       >
         <Plus size={16} /> Add Education
       </button>
@@ -203,7 +235,7 @@ const Editor = ({ mobileTab, setMobileTab }) => {
               value={exp.company} 
               onChange={(e) => {
                 const newExp = [...resumeData.experience];
-                newExp[index].company = e.target.value;
+                newExp[index] = { ...newExp[index], company: e.target.value };
                 updateExperience(newExp);
               }}
             />
@@ -215,7 +247,7 @@ const Editor = ({ mobileTab, setMobileTab }) => {
               value={exp.role} 
               onChange={(e) => {
                 const newExp = [...resumeData.experience];
-                newExp[index].role = e.target.value;
+                newExp[index] = { ...newExp[index], role: e.target.value };
                 updateExperience(newExp);
               }}
             />
@@ -228,7 +260,7 @@ const Editor = ({ mobileTab, setMobileTab }) => {
                 value={exp.location || ''} 
                 onChange={(e) => {
                   const newExp = [...resumeData.experience];
-                  newExp[index].location = e.target.value;
+                  newExp[index] = { ...newExp[index], location: e.target.value };
                   updateExperience(newExp);
                 }}
               />
@@ -240,7 +272,7 @@ const Editor = ({ mobileTab, setMobileTab }) => {
                 value={exp.date || ''} 
                 onChange={(e) => {
                   const newExp = [...resumeData.experience];
-                  newExp[index].date = e.target.value;
+                  newExp[index] = { ...newExp[index], date: e.target.value };
                   updateExperience(newExp);
                 }}
               />
@@ -252,7 +284,7 @@ const Editor = ({ mobileTab, setMobileTab }) => {
               value={exp.bullets.join('\n')} 
               onChange={(e) => {
                 const newExp = [...resumeData.experience];
-                newExp[index].bullets = e.target.value.split('\n');
+                newExp[index] = { ...newExp[index], bullets: e.target.value.split('\n') };
                 updateExperience(newExp);
               }}
             />
@@ -287,7 +319,7 @@ const Editor = ({ mobileTab, setMobileTab }) => {
               value={proj.title} 
               onChange={(e) => {
                 const newProj = [...resumeData.projects];
-                newProj[index].title = e.target.value;
+                newProj[index] = { ...newProj[index], title: e.target.value };
                 updateProjects(newProj);
               }}
             />
@@ -300,7 +332,7 @@ const Editor = ({ mobileTab, setMobileTab }) => {
                 value={proj.tech} 
                 onChange={(e) => {
                   const newProj = [...resumeData.projects];
-                  newProj[index].tech = e.target.value;
+                  newProj[index] = { ...newProj[index], tech: e.target.value };
                   updateProjects(newProj);
                 }}
               />
@@ -313,7 +345,7 @@ const Editor = ({ mobileTab, setMobileTab }) => {
                 value={proj.bullets.join('\n')} 
                 onChange={(e) => {
                   const newProj = [...resumeData.projects];
-                  newProj[index].bullets = e.target.value.split('\n');
+                  newProj[index] = { ...newProj[index], bullets: e.target.value.split('\n') };
                   updateProjects(newProj);
                 }}
               />
@@ -348,7 +380,7 @@ const Editor = ({ mobileTab, setMobileTab }) => {
                 value={skill.title} 
                 onChange={(e) => {
                   const newSkills = [...resumeData.skills];
-                  newSkills[index].title = e.target.value;
+                  newSkills[index] = { ...newSkills[index], title: e.target.value };
                   updateSkills(newSkills);
                 }}
               />
@@ -360,7 +392,7 @@ const Editor = ({ mobileTab, setMobileTab }) => {
                 value={skill.details} 
                 onChange={(e) => {
                   const newSkills = [...resumeData.skills];
-                  newSkills[index].details = e.target.value;
+                  newSkills[index] = { ...newSkills[index], details: e.target.value };
                   updateSkills(newSkills);
                 }}
               />
@@ -583,6 +615,16 @@ const Editor = ({ mobileTab, setMobileTab }) => {
         experienceSection,
         projectsSection,
         skillsSection
+      ];
+    } else if (selectedTemplate === 'OmkarPrabhu') {
+      return [
+        personalSection,
+        summarySection,
+        educationSection,
+        experienceSection,
+        skillsSection,
+        projectsSection,
+        certificationsSection
       ];
     } else if (selectedTemplate === 'NamanCV') {
       return [

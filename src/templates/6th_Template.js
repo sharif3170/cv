@@ -1,7 +1,7 @@
 import React from 'react';
 import { Linkedin, Github, Code2, Globe } from 'lucide-react';
 
-const RezumeTemplate = ({ data }) => {
+const Template6 = ({ data }) => {
   const { personalInfo, education, experience, projects, skills, sectionTitles, summary, certifications } = data;
 
   return (
@@ -13,8 +13,8 @@ const RezumeTemplate = ({ data }) => {
             <h1 className="name">{personalInfo.fullName}</h1>
           </div>
           <div className="header-right">
-            <div className="contact-item">Mobile: <a href={`tel:${personalInfo.phone}`}>{personalInfo.phone}</a></div>
-            <div className="contact-item">Email: <a href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a></div>
+            {personalInfo.phone && <div className="contact-item">Mobile: <a href={`tel:${personalInfo.phone}`}>{personalInfo.phone}</a></div>}
+            {personalInfo.email && <div className="contact-item">Email: <a href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a></div>}
           </div>
         </div>
         
@@ -25,19 +25,28 @@ const RezumeTemplate = ({ data }) => {
             </a>
           )}
           {personalInfo.linkedin && (
-            <a href={`https://${personalInfo.linkedin}`} target="_blank" rel="noreferrer" className="link-item">
-              <Linkedin size={12} className="link-icon" /> LinkedIn
-            </a>
+            <>
+              {personalInfo.website && <span className="pipe">|</span>}
+              <a href={`https://${personalInfo.linkedin}`} target="_blank" rel="noreferrer" className="link-item">
+                <Linkedin size={12} className="link-icon" /> LinkedIn
+              </a>
+            </>
           )}
           {personalInfo.github && (
-            <a href={`https://${personalInfo.github}`} target="_blank" rel="noreferrer" className="link-item">
-              <Github size={12} className="link-icon" /> GitHub
-            </a>
+            <>
+              {(personalInfo.website || personalInfo.linkedin) && <span className="pipe">|</span>}
+              <a href={`https://${personalInfo.github}`} target="_blank" rel="noreferrer" className="link-item">
+                <Github size={12} className="link-icon" /> GitHub
+              </a>
+            </>
           )}
           {personalInfo.leetcode && (
-            <a href={`https://${personalInfo.leetcode}`} target="_blank" rel="noreferrer" className="link-item">
-              <Code2 size={12} className="link-icon" /> Leetcode
-            </a>
+            <>
+              {(personalInfo.website || personalInfo.linkedin || personalInfo.github) && <span className="pipe">|</span>}
+              <a href={`https://${personalInfo.leetcode}`} target="_blank" rel="noreferrer" className="link-item">
+                <Code2 size={12} className="link-icon" /> Leetcode
+              </a>
+            </>
           )}
         </div>
       </header>
@@ -103,6 +112,7 @@ const RezumeTemplate = ({ data }) => {
               <span className="italic">{edu.degree}</span>
               <span className="date">{edu.date}</span>
             </div>
+            {edu.gpa && <div className="italic" style={{ fontSize: '10pt', marginTop: '2px' }}>{edu.gpa.includes('%') ? 'Percentage: ' : 'GPA: '}{edu.gpa}</div>}
           </div>
         ))}
       </section>
@@ -119,7 +129,6 @@ const RezumeTemplate = ({ data }) => {
                   <span className="bold">{proj.title}</span>
                   <span className="proj-tech italic">{proj.tech}</span>
                 </div>
-                <button className="source-link">Source Code</button>
               </div>
               <ul className="bullets">
                 {proj.bullets.map((bullet, i) => (
@@ -190,18 +199,31 @@ const RezumeTemplate = ({ data }) => {
           align-items: center;
           gap: 4px;
           font-size: 9pt;
-          color: #000;
+          color: #004a99;
           text-decoration: none;
+        }
+
+        .pipe {
+          color: #ccc;
+          user-select: none;
         }
 
         .link-icon {
           flex-shrink: 0;
-          color: #000;
+          color: #004a99;
         }
 
         .header-right {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
           text-align: right;
           font-size: 9pt;
+        }
+
+        .contact-item a {
+          color: #004a99;
+          text-decoration: none;
         }
 
         .summary-section {
@@ -221,7 +243,7 @@ const RezumeTemplate = ({ data }) => {
         .section-title {
           font-size: 11pt;
           font-weight: 700;
-          color: #0000FF;
+          color: #000;
           margin: 0;
         }
 
@@ -323,7 +345,7 @@ const RezumeTemplate = ({ data }) => {
 
         .cert-link {
           color: #000;
-          text-decoration: underline;
+          text-decoration: none;
           background: none;
           border: none;
           padding: 0;
@@ -336,4 +358,4 @@ const RezumeTemplate = ({ data }) => {
   );
 };
 
-export default RezumeTemplate;
+export default Template6;

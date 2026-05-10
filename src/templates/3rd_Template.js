@@ -34,7 +34,7 @@ const LeetCodeIcon = ({ size = 12 }) => (
   </svg>
 );
 
-const AutoCVTemplate = ({ data }) => {
+const Template3 = ({ data }) => {
   const { personalInfo, summary, education, experience, projects, skills, sectionTitles } = data;
 
   return (
@@ -43,32 +43,42 @@ const AutoCVTemplate = ({ data }) => {
       <header className="autocv-header">
         <h1 className="name">{personalInfo.fullName}</h1>
         <div className="contact-info">
-          {personalInfo.email && (
-            <a href={`mailto:${personalInfo.email}`} className="contact-item">
-              <MailIcon size={12} /> {personalInfo.email}
-            </a>
-          )}
-          {personalInfo.phone && (
-            <a href={`tel:${personalInfo.phone.replace(/[^0-9+]/g, '')}`} className="contact-item">
-              <PhoneIcon size={12} /> {personalInfo.phone}
-            </a>
-          )}
-        </div>
-        <div className="social-info">
           {personalInfo.linkedin && (
             <a href={personalInfo.linkedin.startsWith('http') ? personalInfo.linkedin : `https://${personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="contact-item">
               <LinkedinIcon size={12} /> LinkedIn
             </a>
           )}
           {personalInfo.github && (
-            <a href={personalInfo.github.startsWith('http') ? personalInfo.github : `https://${personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="contact-item">
-              <GithubIcon size={12} /> GitHub
-            </a>
+            <>
+              {personalInfo.linkedin && <span className="pipe">|</span>}
+              <a href={personalInfo.github.startsWith('http') ? personalInfo.github : `https://${personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="contact-item">
+                <GithubIcon size={12} /> GitHub
+              </a>
+            </>
           )}
           {personalInfo.leetcode && (
-            <a href={personalInfo.leetcode.startsWith('http') ? personalInfo.leetcode : `https://${personalInfo.leetcode}`} target="_blank" rel="noopener noreferrer" className="contact-item">
-              <LeetCodeIcon size={12} /> LeetCode
-            </a>
+            <>
+              {(personalInfo.linkedin || personalInfo.github) && <span className="pipe">|</span>}
+              <a href={personalInfo.leetcode.startsWith('http') ? personalInfo.leetcode : `https://${personalInfo.leetcode}`} target="_blank" rel="noopener noreferrer" className="contact-item">
+                <LeetCodeIcon size={12} /> LeetCode
+              </a>
+            </>
+          )}
+          {personalInfo.phone && (
+            <>
+              {(personalInfo.linkedin || personalInfo.github || personalInfo.leetcode) && <span className="pipe">|</span>}
+              <a href={`tel:${personalInfo.phone.replace(/[^0-9+]/g, '')}`} className="contact-item">
+                <PhoneIcon size={12} /> {personalInfo.phone}
+              </a>
+            </>
+          )}
+          {personalInfo.email && (
+            <>
+              {(personalInfo.linkedin || personalInfo.github || personalInfo.leetcode || personalInfo.phone) && <span className="pipe">|</span>}
+              <a href={`mailto:${personalInfo.email}`} className="contact-item">
+                <MailIcon size={12} /> {personalInfo.email}
+              </a>
+            </>
           )}
         </div>
       </header>
@@ -96,6 +106,7 @@ const AutoCVTemplate = ({ data }) => {
               <span className="italic">{edu.degree}</span>
               <span className="right-text">{edu.location}</span>
             </div>
+            {edu.gpa && <div className="italic" style={{ fontSize: '10.5pt', marginTop: '2px' }}>{edu.gpa.includes('%') ? 'Percentage: ' : 'GPA: '}{edu.gpa}</div>}
             {edu.bullets && edu.bullets.length > 0 && (
               <ul className="bullets">
                 {edu.bullets.map((bullet, i) => (
@@ -196,11 +207,11 @@ const AutoCVTemplate = ({ data }) => {
           letter-spacing: -0.5px;
         }
 
-        .autocv-container .contact-info, .autocv-container .social-info {
+        .autocv-container .contact-info {
           display: flex;
           justify-content: center;
           align-items: center;
-          gap: 15px;
+          gap: 12px;
           font-size: 10pt;
           margin-top: 4px;
         }
@@ -209,12 +220,17 @@ const AutoCVTemplate = ({ data }) => {
           display: flex;
           align-items: center;
           gap: 5px;
-          color: inherit;
+          color: #004a99;
           text-decoration: none;
         }
 
+        .autocv-container .pipe {
+          color: #ccc;
+          user-select: none;
+        }
+
         .autocv-container .contact-item svg {
-          color: #555;
+          color: #004a99;
         }
 
         .autocv-container .section {
@@ -226,7 +242,7 @@ const AutoCVTemplate = ({ data }) => {
           font-weight: 700;
           margin-bottom: 3px;
           letter-spacing: 1px;
-          color: #333;
+          color: #000;
         }
 
         .autocv-container .section-line {
@@ -319,4 +335,4 @@ const AutoCVTemplate = ({ data }) => {
   );
 };
 
-export default AutoCVTemplate;
+export default Template3;

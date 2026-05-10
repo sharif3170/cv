@@ -53,7 +53,7 @@ const CodeIcon = ({ size = 12 }) => (
   </svg>
 );
 
-const NamanCVTemplate = ({ data }) => {
+const Template7 = ({ data }) => {
   const { personalInfo, education, experience, projects, skills, summary, certifications, sectionTitles } = data;
 
   return (
@@ -144,9 +144,10 @@ const NamanCVTemplate = ({ data }) => {
                   <span className="bold">{edu.degree}</span> at <span className="bold">{edu.school}</span>
                 </span>
                 <span className="edu-right">
-                  {edu.bullets && edu.bullets[0]}
+                  {!edu.gpa && edu.bullets && edu.bullets[0]}
                 </span>
               </div>
+              {edu.gpa && <div className="edu-gpa" style={{ marginLeft: '110px', fontSize: '10pt', fontStyle: 'italic' }}>{edu.gpa.includes('%') ? 'Percentage: ' : 'GPA: '}{edu.gpa}</div>}
             </div>
           ))}
         </section>
@@ -201,9 +202,7 @@ const NamanCVTemplate = ({ data }) => {
               <div className="item-header">
                 <span className="bold">{proj.title}</span>
                 <span className="right-info">
-                   {proj.date.includes('http') || proj.date.toLowerCase().includes('link') ? (
-                     <a href={proj.date.includes('http') ? proj.date : '#'} className="demo-link">{proj.date}</a>
-                   ) : proj.date}
+                  {(!proj.date?.includes('http') && !proj.date?.toLowerCase().includes('link')) && proj.date}
                 </span>
               </div>
               {proj.tech && (
@@ -420,4 +419,4 @@ const NamanCVTemplate = ({ data }) => {
   );
 };
 
-export default NamanCVTemplate;
+export default Template7;

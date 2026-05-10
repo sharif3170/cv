@@ -1,14 +1,15 @@
 import React, { useRef, useState } from 'react';
 import './App.css';
-import { ResumeProvider, useResume, jakeRyanData, harishbarData, autoCVData, jaydevVarmaData, twoColumnData, namanCVData, rezumeData } from './context/ResumeContext';
+import { ResumeProvider, useResume, jakeRyanData, harishbarData, autoCVData, jaydevVarmaData, twoColumnData, namanCVData, rezumeData, omkarPrabhuData } from './context/ResumeContext';
 import Editor from './components/Editor';
-import JakeRyanTemplate from './templates/JakeRyan';
-import HarishbarTemplate from './templates/Harishbar';
-import AutoCVTemplate from './templates/AutoCV';
-import JaydevVarmaTemplate from './templates/JaydevVarma';
-import TwoColumnTemplate from './templates/TwoColumn';
-import RezumeTemplate from './templates/Rezume';
-import NamanCVTemplate from './templates/NamanCV';
+import Template1 from './templates/1st_Template';
+import Template2 from './templates/2nd_Template';
+import Template3 from './templates/3rd_Template';
+import Template4 from './templates/4th_Template';
+import Template5 from './templates/5th_Template';
+import Template6 from './templates/6th_Template';
+import Template7 from './templates/7th_Template';
+import Template8 from './templates/8th_Template';
 import { Download, Layout, Edit3, Eye, X, Menu, ChevronRight, ChevronLeft } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -22,13 +23,14 @@ const PreviewModal = ({ isOpen, onClose, template, data }) => {
         <button className="modal-close" onClick={onClose}><X size={24} /></button>
         <div className="modal-body">
           <div className="preview-wrap scale-down">
-            {template === 'JakeRyan' && <JakeRyanTemplate data={data} />}
-            {template === 'Harishbar' && <HarishbarTemplate data={data} />}
-            {template === 'AutoCV' && <AutoCVTemplate data={data} />}
-            {template === 'JaydevVarma' && <JaydevVarmaTemplate data={data} />}
-            {template === 'TwoColumn' && <TwoColumnTemplate data={data} />}
-            {template === 'Rezume' && <RezumeTemplate data={data} />}
-            {template === 'NamanCV' && <NamanCVTemplate data={data} />}
+            {template === 'JakeRyan' && <Template1 data={data} />}
+            {template === 'Harishbar' && <Template2 data={data} />}
+            {template === 'AutoCV' && <Template3 data={data} />}
+            {template === 'JaydevVarma' && <Template4 data={data} />}
+            {template === 'TwoColumn' && <Template5 data={data} />}
+            {template === 'Rezume' && <Template6 data={data} />}
+            {template === 'NamanCV' && <Template7 data={data} />}
+            {template === 'OmkarPrabhu' && <Template8 data={data} />}
           </div>
         </div>
       </div>
@@ -134,7 +136,7 @@ const MainApp = () => {
           >
             <div className="template-preview-thumb">
               <div className="mini-template-view">
-                <JakeRyanTemplate data={jakeRyanData} />
+                <Template1 data={jakeRyanData} />
               </div>
               <div className="card-actions">
                 <button
@@ -168,7 +170,7 @@ const MainApp = () => {
           >
             <div className="template-preview-thumb">
               <div className="mini-template-view">
-                <HarishbarTemplate data={harishbarData} />
+                <Template2 data={harishbarData} />
               </div>
               <div className="card-actions">
                 <button
@@ -202,7 +204,7 @@ const MainApp = () => {
           >
             <div className="template-preview-thumb">
               <div className="mini-template-view">
-                <AutoCVTemplate data={autoCVData} />
+                <Template3 data={autoCVData} />
               </div>
               <div className="card-actions">
                 <button
@@ -237,7 +239,7 @@ const MainApp = () => {
           >
             <div className="template-preview-thumb">
               <div className="mini-template-view">
-                <JaydevVarmaTemplate data={jaydevVarmaData} />
+                <Template4 data={jaydevVarmaData} />
               </div>
               <div className="card-actions">
                 <button
@@ -271,7 +273,7 @@ const MainApp = () => {
           >
             <div className="template-preview-thumb">
               <div className="mini-template-view">
-                <TwoColumnTemplate data={twoColumnData} />
+                <Template5 data={twoColumnData} />
               </div>
               <div className="card-actions">
                 <button
@@ -304,7 +306,7 @@ const MainApp = () => {
           >
             <div className="template-preview-thumb">
               <div className="mini-template-view">
-                <RezumeTemplate data={rezumeData} />
+                <Template6 data={rezumeData} />
               </div>
               <div className="card-actions">
                 <button
@@ -338,7 +340,7 @@ const MainApp = () => {
           >
             <div className="template-preview-thumb">
               <div className="mini-template-view">
-                {namanCVData && <NamanCVTemplate data={namanCVData} />}
+                <Template7 data={namanCVData} />
               </div>
               <div className="card-actions">
                 <button
@@ -347,7 +349,6 @@ const MainApp = () => {
                     e.stopPropagation();
                     setIsPreviewOpen(true);
                     setSelectedTemplate('NamanCV');
-                    loadSampleData('NamanCV');
                   }}
                   title="Quick View"
                 >
@@ -358,6 +359,40 @@ const MainApp = () => {
             <div className="template-info">
               <h3>Resume Template 7</h3>
               <p>Academic & Research Layout</p>
+            </div>
+          </motion.div>
+
+          {/* Template 8: Omkar Prabhu */}
+          <motion.div
+            whileHover={{ y: -10 }}
+            className={`template-card ${selectedTemplate === 'OmkarPrabhu' ? 'selected' : ''}`}
+            onClick={() => {
+              setSelectedTemplate('OmkarPrabhu');
+              loadSampleData('OmkarPrabhu');
+              setView('editor');
+            }}
+          >
+            <div className="template-preview-thumb">
+              <div className="mini-template-view">
+                <Template8 data={omkarPrabhuData} />
+              </div>
+              <div className="card-actions">
+                <button
+                  className="card-action-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsPreviewOpen(true);
+                    setSelectedTemplate('OmkarPrabhu');
+                  }}
+                  title="Quick View"
+                >
+                  <Eye size={18} />
+                </button>
+              </div>
+            </div>
+            <div className="template-info">
+              <h3>Resume Template 8</h3>
+              <p>Elegant Two-Column Design</p>
             </div>
           </motion.div>
         </div>
@@ -495,7 +530,8 @@ const MainApp = () => {
                 selectedTemplate === 'AutoCV' ? 'Resume Template 3' :
                   selectedTemplate === 'JaydevVarma' ? 'Resume Template 4' : 
                     selectedTemplate === 'TwoColumn' ? 'Resume Template 5' : 
-                      selectedTemplate === 'Rezume' ? 'Resume Template 6' : 'Resume Template 7'}
+                      selectedTemplate === 'Rezume' ? 'Resume Template 6' :
+                        selectedTemplate === 'NamanCV' ? 'Resume Template 7' : 'Resume Template 8'}
           </span>
           <span className="mobile-view-title mobile-only">
             {mobileTab === 'edit' ? 'Edit Resume' :
@@ -542,13 +578,14 @@ const MainApp = () => {
           <div className="preview-scroll">
             {previewTab === 'preview' ? (
               <div className="preview-scale" ref={resumeRef}>
-                {selectedTemplate === 'JakeRyan' && <JakeRyanTemplate data={resumeData} />}
-                {selectedTemplate === 'Harishbar' && <HarishbarTemplate data={resumeData} />}
-                {selectedTemplate === 'AutoCV' && <AutoCVTemplate data={resumeData} />}
-                {selectedTemplate === 'JaydevVarma' && <JaydevVarmaTemplate data={resumeData} />}
-                {selectedTemplate === 'TwoColumn' && <TwoColumnTemplate data={resumeData} />}
-                {selectedTemplate === 'Rezume' && <RezumeTemplate data={resumeData} />}
-                {selectedTemplate === 'NamanCV' && <NamanCVTemplate data={resumeData} />}
+                {selectedTemplate === 'JakeRyan' && <Template1 data={resumeData} />}
+                {selectedTemplate === 'Harishbar' && <Template2 data={resumeData} />}
+                {selectedTemplate === 'AutoCV' && <Template3 data={resumeData} />}
+                {selectedTemplate === 'JaydevVarma' && <Template4 data={resumeData} />}
+                {selectedTemplate === 'TwoColumn' && <Template5 data={resumeData} />}
+                {selectedTemplate === 'Rezume' && <Template6 data={resumeData} />}
+                {selectedTemplate === 'NamanCV' && <Template7 data={resumeData} />}
+                {selectedTemplate === 'OmkarPrabhu' && <Template8 data={resumeData} />}
               </div>
             ) : (
               <div className="structure-editor">
@@ -871,6 +908,63 @@ const MainApp = () => {
                       </div>
                       <div className="input-group">
                         <label>Section</label>
+                        <input
+                          type="text"
+                          value={resumeData.sectionTitles?.certifications || ''}
+                          placeholder="CERTIFICATIONS"
+                          onChange={(e) => updateSectionTitles({ certifications: e.target.value })}
+                        />
+                      </div>
+                    </>
+                  ) : selectedTemplate === 'OmkarPrabhu' ? (
+                    <>
+                      <div className="input-group">
+                        <label>Carrier Objective Title</label>
+                        <input
+                          type="text"
+                          value={resumeData.sectionTitles?.summary || ''}
+                          placeholder="CARRIER OBJECTIVE"
+                          onChange={(e) => updateSectionTitles({ summary: e.target.value })}
+                        />
+                      </div>
+                      <div className="input-group">
+                        <label>Education Title</label>
+                        <input
+                          type="text"
+                          value={resumeData.sectionTitles?.education || ''}
+                          placeholder="EDUCATION"
+                          onChange={(e) => updateSectionTitles({ education: e.target.value })}
+                        />
+                      </div>
+                      <div className="input-group">
+                        <label>Experience Title</label>
+                        <input
+                          type="text"
+                          value={resumeData.sectionTitles?.experience || ''}
+                          placeholder="EXPERIENCE"
+                          onChange={(e) => updateSectionTitles({ experience: e.target.value })}
+                        />
+                      </div>
+                      <div className="input-group">
+                        <label>Skills Title</label>
+                        <input
+                          type="text"
+                          value={resumeData.sectionTitles?.skills || ''}
+                          placeholder="SKILLS"
+                          onChange={(e) => updateSectionTitles({ skills: e.target.value })}
+                        />
+                      </div>
+                      <div className="input-group">
+                        <label>Projects Title</label>
+                        <input
+                          type="text"
+                          value={resumeData.sectionTitles?.projects || ''}
+                          placeholder="PROJECTS"
+                          onChange={(e) => updateSectionTitles({ projects: e.target.value })}
+                        />
+                      </div>
+                      <div className="input-group">
+                        <label>Certifications Title</label>
                         <input
                           type="text"
                           value={resumeData.sectionTitles?.certifications || ''}

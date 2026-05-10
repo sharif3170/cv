@@ -32,7 +32,7 @@ const LeetCodeIcon = ({ size = 14 }) => (
   </svg>
 );
 
-const JakeRyanTemplate = ({ data }) => {
+const Template1 = ({ data }) => {
   const { personalInfo, education, experience, projects, skills, sectionTitles } = data;
 
   return (
@@ -41,17 +41,31 @@ const JakeRyanTemplate = ({ data }) => {
       <header className="header">
         <h1 className="name">{personalInfo.fullName}</h1>
         <div className="contact-info">
-          <span><a href={`tel:${personalInfo.phone.replace(/[^0-9+]/g, '')}`}>{personalInfo.phone}</a></span> 
-          <span className="pipe">|</span> 
-          <span><a href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a></span> 
-          <span className="pipe">|</span> 
-          <span><a href={`https://${personalInfo.linkedin}`} target="_blank" rel="noreferrer" className="icon-link"><LinkedinIcon size={14} /> LinkedIn</a></span> 
-          <span className="pipe">|</span> 
-          <span><a href={`https://${personalInfo.github}`} target="_blank" rel="noreferrer" className="icon-link"><GithubIcon size={14} /> GitHub</a></span>
+          {personalInfo.linkedin && (
+            <span><a href={`https://${personalInfo.linkedin}`} target="_blank" rel="noreferrer" className="icon-link"><LinkedinIcon size={14} /> LinkedIn</a></span>
+          )}
+          {personalInfo.github && (
+            <>
+              {personalInfo.linkedin && <span className="pipe">|</span>}
+              <span><a href={`https://${personalInfo.github}`} target="_blank" rel="noreferrer" className="icon-link"><GithubIcon size={14} /> GitHub</a></span>
+            </>
+          )}
           {personalInfo.leetcode && (
             <>
-              <span className="pipe">|</span> 
+              {(personalInfo.linkedin || personalInfo.github) && <span className="pipe">|</span>}
               <span><a href={personalInfo.leetcode.startsWith('http') ? personalInfo.leetcode : `https://${personalInfo.leetcode}`} target="_blank" rel="noreferrer" className="icon-link"><LeetCodeIcon size={14} /> LeetCode</a></span>
+            </>
+          )}
+          {personalInfo.phone && (
+            <>
+              {(personalInfo.linkedin || personalInfo.github || personalInfo.leetcode) && <span className="pipe">|</span>}
+              <span><a href={`tel:${personalInfo.phone.replace(/[^0-9+]/g, '')}`}>{personalInfo.phone}</a></span>
+            </>
+          )}
+          {personalInfo.email && (
+            <>
+              {(personalInfo.linkedin || personalInfo.github || personalInfo.leetcode || personalInfo.phone) && <span className="pipe">|</span>}
+              <span><a href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a></span>
             </>
           )}
         </div>
@@ -70,6 +84,7 @@ const JakeRyanTemplate = ({ data }) => {
               <span className="italic">{edu.degree}</span>
               <span className="italic">{edu.date}</span>
             </div>
+            {edu.gpa && <div className="italic" style={{ fontSize: '10pt' }}>{edu.gpa.includes('%') ? 'Percentage: ' : 'GPA: '}{edu.gpa}</div>}
           </div>
         ))}
       </section>
@@ -165,7 +180,7 @@ const JakeRyanTemplate = ({ data }) => {
         }
 
         .resume-container .contact-info a {
-          color: black;
+          color: #004a99;
           text-decoration: none;
         }
 
@@ -239,4 +254,4 @@ const JakeRyanTemplate = ({ data }) => {
   );
 };
 
-export default JakeRyanTemplate;
+export default Template1;

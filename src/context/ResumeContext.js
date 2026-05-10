@@ -21,28 +21,32 @@ const namanCVData = {
       location: 'Stanford, CA',
       degree: 'Master of Science in Computer Science',
       date: '2021 - 2023',
-      bullets: ['(CGPA: 9.2/10.0)']
+      gpa: '9.2/10.0',
+      bullets: []
     },
     {
       school: 'UC Berkeley',
       location: 'Berkeley, CA',
       degree: 'Bachelor of Science in Computer Science',
       date: '2017 - 2021',
-      bullets: ['(CGPA: 8.8/10.0)']
+      gpa: '8.8/10.0',
+      bullets: []
     },
     {
       school: 'Delhi Public School',
       location: 'New Delhi, India',
       degree: 'Intermediate (Class 12th)',
       date: '2015 - 2017',
-      bullets: ['(95%)']
+      gpa: '95%',
+      bullets: []
     },
     {
       school: 'St. Xavier\'s High School',
       location: 'Mumbai, India',
       degree: 'SSC (Class 10th)',
       date: '2015',
-      bullets: ['(92%)']
+      gpa: '92%',
+      bullets: []
     }
   ],
   experience: [
@@ -125,6 +129,7 @@ export const jakeRyanData = {
       location: 'Georgetown, TX',
       degree: 'Bachelor of Arts in Computer Science, Minor in Business',
       date: 'Aug. 2018 -- May 2021',
+      gpa: '3.8/4.0',
       bullets: []
     },
     {
@@ -132,6 +137,7 @@ export const jakeRyanData = {
       location: 'Bryan, TX',
       degree: 'Associate\'s in Liberal Arts',
       date: 'Aug. 2014 -- May 2018',
+      gpa: '3.6/4.0',
       bullets: []
     }
   ],
@@ -231,6 +237,7 @@ export const harishbarData = {
       location: 'Wellesley, MA',
       degree: 'Bachelor of Arts in Computer Science and Pre-Med',
       date: 'Aug. 2014 – May 2018',
+      gpa: '3.9/4.0',
       bullets: [
         'Coursework: Data Structures, Algorithms, Databases, Computer Systems, Machine Learning',
         'Research: MIT Graybiel Lab (published author), MIT Media Lab (analyzed urban microbe spread)'
@@ -337,28 +344,32 @@ export const autoCVData = {
       location: 'Mumbai, India',
       degree: 'M.Tech in Computer Science and Engineering',
       date: '2019 -- 2021',
-      bullets: ['Specialization in Artificial Intelligence and Machine Learning', 'GPA: 9.5/10.0']
+      gpa: '9.5/10.0',
+      bullets: ['Specialization in Artificial Intelligence and Machine Learning']
     },
     {
       school: 'National Institute of Technology',
       location: 'Warangal, India',
       degree: 'B.Tech in Information Technology',
       date: '2015 -- 2019',
-      bullets: ['Graduated with First Class Distinction', 'Major GPA: 8.8/10.0']
+      gpa: '8.8/10.0',
+      bullets: ['Graduated with First Class Distinction']
     },
     {
       school: 'Delhi Public School',
       location: 'New Delhi, India',
       degree: 'Higher Secondary Education (12th)',
       date: '2013 -- 2015',
-      bullets: ['CBSE Board - 94%', 'Stream: Physics, Chemistry, Mathematics, Computer Science']
+      gpa: '94%',
+      bullets: ['Stream: Physics, Chemistry, Mathematics, Computer Science']
     },
     {
       school: 'St. Xavier\'s High School',
       location: 'Mumbai, India',
       degree: 'Secondary School Certificate (SSC)',
       date: '2013',
-      bullets: ['Maharashtra State Board - 92%']
+      gpa: '92%',
+      bullets: []
     }
   ],
   experience: [
@@ -438,28 +449,32 @@ export const jaydevVarmaData = {
       location: 'Chennai, India',
       degree: 'M.Tech in Computer Science',
       date: '2014 -- 2016',
-      bullets: ['Specialization in Distributed Systems', 'GPA: 9.5/10.0']
+      gpa: '9.5/10.0',
+      bullets: ['Specialization in Distributed Systems']
     },
     {
       school: 'Indian Institute of Technology, Madras',
       location: 'Chennai, India',
       degree: 'B.Tech in Computer Science',
       date: '2010 -- 2014',
-      bullets: ['GPA: 9.2/10.0', 'Recipient of Institute Merit Scholarship']
+      gpa: '9.2/10.0',
+      bullets: ['Recipient of Institute Merit Scholarship']
     },
     {
       school: 'Delhi Public School',
       location: 'New Delhi, India',
       degree: 'Higher Secondary Education (12th)',
       date: '2010',
-      bullets: ['CBSE Board - 94%', 'Physics, Chemistry, Mathematics, Computer Science']
+      gpa: '94%',
+      bullets: ['Physics, Chemistry, Mathematics, Computer Science']
     },
     {
       school: 'St. Xavier\'s High School',
       location: 'Mumbai, India',
       degree: 'Secondary School Certificate (SSC)',
       date: '2008',
-      bullets: ['Maharashtra State Board - 92%']
+      gpa: '92%',
+      bullets: []
     }
   ],
   experience: [
@@ -548,25 +563,29 @@ export const twoColumnData = {
       school: 'IIT Bombay',
       location: 'Mumbai, India',
       degree: 'M.Tech in Computer Science',
-      date: '2021 -- 2023'
+      date: '2021 -- 2023',
+      gpa: '9.3/10.0'
     },
     {
       school: 'NIT Warangal',
       location: 'Warangal, India',
       degree: 'B.Tech in Computer Science',
-      date: '2017 -- 2021'
+      date: '2017 -- 2021',
+      gpa: '8.9/10.0'
     },
     {
       school: 'Delhi Public School',
       location: 'New Delhi, India',
       degree: 'Intermediate (HSC)',
-      date: '2015 -- 2017'
+      date: '2015 -- 2017',
+      gpa: '95%'
     },
     {
       school: 'St. Xavier\'s High School',
       location: 'Mumbai, India',
       degree: 'SSC',
-      date: '2015'
+      date: '2015',
+      gpa: '93%'
     }
   ],
   experience: [
@@ -669,7 +688,8 @@ export const rezumeData = {
       school: 'University of Anystate',
       location: 'Anycity, Anystate, Anycountry',
       degree: 'Bachelor of Science in Computer Science',
-      date: 'Jan 2016 -- Dec 2020'
+      date: 'Jan 2016 -- Dec 2020',
+      gpa: '3.8/4.0'
     }
   ],
   experience: [
@@ -748,36 +768,159 @@ export const rezumeData = {
   }
 };
 
-export const ResumeProvider = ({ children }) => {
-  const [resumeData, setResumeData] = useState(jakeRyanData);
-  const [selectedTemplate, setSelectedTemplate] = useState('JakeRyan');
+export const omkarPrabhuData = {
+  personalInfo: {
+    fullName: 'Your Name',
+    email: 'yourmail@example.com',
+    phone: '+00 0000 0000',
+    website: 'yourwebsite.com',
+    location: 'Your Location',
+    linkedin: 'linkedin.com',
+    github: 'github.com',
+    leetcode: 'leetcode.com',
+    role: 'Software Engineer'
+  },
+  summary: 'Detail-oriented Software Engineer with a proven track record of designing and implementing large-scale distributed systems. Expert in full-stack development, cloud infrastructure, and performance optimization, with a deep passion for building innovative and efficient software solutions.',
+  experience: [
+    {
+      company: 'Google',
+      location: 'Bangalore, India',
+      role: 'Senior Software Engineer',
+      date: 'Jan 2021 -- Present',
+      bullets: [
+        'Lead engineer for a distributed search indexing team, improving query performance by 30% using advanced caching and Go.',
+        'Architected a real-time monitoring system for Google Cloud Platform services using Kubernetes and Prometheus.'
+      ]
+    },
+    {
+      company: 'Microsoft',
+      location: 'Hyderabad, India',
+      role: 'Software Engineer II',
+      date: 'June 2018 -- Dec 2020',
+      bullets: [
+        'Developed core backend services for Azure Storage using C# and .NET Core, handling 1M+ requests per second.',
+        'Collaborated with global teams to implement a zero-trust security model for enterprise cloud offerings.'
+      ]
+    },
+    {
+      company: 'Amazon',
+      location: 'Chennai, India',
+      role: 'Software Development Engineer Intern',
+      date: 'May 2017 -- Aug 2017',
+      bullets: [
+        'Optimized internal inventory management API using Java and AWS DynamoDB, reducing latency by 15%.',
+        'Implemented automated unit testing for the checkout service, increasing code coverage to 95%.'
+      ]
+    }
+  ],
+  education: [
+    {
+      school: 'Indian Institute of Technology, Delhi',
+      location: 'New Delhi, India',
+      degree: 'M.Tech in Software Engineering',
+      date: '2021 - 2023',
+      gpa: '9.5/10.0',
+      bullets: []
+    },
+    {
+      school: 'National Institute of Technology, Warangal',
+      location: 'Warangal, India',
+      degree: 'B.Tech in Computer Science and Engineering',
+      date: '2017 - 2021',
+      gpa: '9.2/10.0',
+      bullets: []
+    },
+    {
+      school: 'Sri Chaitanya Junior College',
+      location: 'Hyderabad, India',
+      degree: 'Intermediate (MPC)',
+      date: '2015 - 2017',
+      gpa: '96%',
+      bullets: []
+    },
+    {
+      school: 'St. Xavier\'s High School',
+      location: 'Mumbai, India',
+      degree: 'SSC (10th Standard)',
+      date: '2015',
+      gpa: '94%',
+      bullets: []
+    }
+  ],
+  awards: [
+    {
+      title: 'Fake Academy Fellow',
+      organization: 'Fake Academy of Arts and Sciences',
+      date: '2016'
+    },
+    {
+      title: 'Elon Musk Award',
+      organization: 'State of Engineering',
+      date: '2012'
+    },
+    {
+      title: 'ACM Fellow',
+      organization: 'Association for Computing Machinery',
+      date: '2009'
+    }
+  ],
+  skills: [
+    { title: 'Languages', details: 'Java, Python, C++, JavaScript, TypeScript, Go, SQL' },
+    { title: 'Frameworks & Libraries', details: 'React, Node.js, Spring Boot, Next.js, Django, Redux, Express' },
+    { title: 'Cloud & DevOps', details: 'AWS (EC2, S3, Lambda), Azure, Docker, Kubernetes, Terraform, Jenkins, Git' },
+    { title: 'Databases', details: 'PostgreSQL, MongoDB, Redis, MySQL, Elasticsearch' }
+  ],
+  projects: [
+    {
+      title: 'AI Portfolio Manager',
+      tech: 'React, Python, OpenAI API',
+      date: '',
+      bullets: ['Developed an intelligent asset allocation tool that uses GPT-4 for sentiment analysis and portfolio rebalancing recommendations.']
+    },
+    {
+      title: 'E-commerce Microservices',
+      tech: 'Node.js, Docker, Kubernetes',
+      date: '',
+      bullets: ['Built a scalable backend architecture with 10+ services, handling 50k+ daily orders with zero downtime during deployments.']
+    },
+    {
+      title: 'Real-time Code Editor',
+      tech: 'WebSocket, Redis, React',
+      date: '',
+      bullets: ['Engineered a collaborative code editor supporting 100+ concurrent users with sub-50ms latency using operational transformation.']
+    }
+  ],
+  certifications: [
+    { title: 'AWS Certified Solutions Architect – Associate' },
+    { title: 'Google Professional Cloud Developer' },
+    { title: 'Meta Front-End Developer Professional Certificate' }
+  ],
+  hobbies: ['UI/UX', 'Problem Solving', 'Healthcare', 'Open Source'],
+  sectionTitles: {
+    summary: 'CARRIER OBJECTIVE',
+    education: 'EDUCATION',
+    experience: 'EXPERIENCE',
+    skills: 'SKILLS',
+    projects: 'PROJECTS',
+    certifications: 'CERTIFICATIONS'
+  }
+};
 
-  // Automatically load sample data when switching templates to prevent "mixed" content
+export const ResumeProvider = ({ children }) => {
+  const [selectedTemplate, setSelectedTemplate] = useState('JakeRyan');
+  const [resumeData, setResumeData] = useState(jakeRyanData);
+
   const loadSampleData = (templateName) => {
     switch (templateName) {
-      case 'JakeRyan':
-        setResumeData(jakeRyanData);
-        break;
-      case 'Harishbar':
-        setResumeData(harishbarData);
-        break;
-      case 'AutoCV':
-        setResumeData(autoCVData);
-        break;
-      case 'JaydevVarma':
-        setResumeData(jaydevVarmaData);
-        break;
-      case 'TwoColumn':
-        setResumeData(twoColumnData);
-        break;
-      case 'Rezume':
-        setResumeData(rezumeData);
-        break;
-      case 'NamanCV':
-        setResumeData(namanCVData);
-        break;
-      default:
-        setResumeData(jakeRyanData);
+      case 'JakeRyan': setResumeData(JSON.parse(JSON.stringify(jakeRyanData))); break;
+      case 'Harishbar': setResumeData(JSON.parse(JSON.stringify(harishbarData))); break;
+      case 'AutoCV': setResumeData(JSON.parse(JSON.stringify(autoCVData))); break;
+      case 'JaydevVarma': setResumeData(JSON.parse(JSON.stringify(jaydevVarmaData))); break;
+      case 'TwoColumn': setResumeData(JSON.parse(JSON.stringify(twoColumnData))); break;
+      case 'Rezume': setResumeData(JSON.parse(JSON.stringify(rezumeData))); break;
+      case 'NamanCV': setResumeData(JSON.parse(JSON.stringify(namanCVData))); break;
+      case 'OmkarPrabhu': setResumeData(JSON.parse(JSON.stringify(omkarPrabhuData))); break;
+      default: setResumeData(JSON.parse(JSON.stringify(jakeRyanData)));
     }
   };
 

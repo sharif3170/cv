@@ -32,7 +32,7 @@ const LeetCodeIcon = ({ size = 14 }) => (
   </svg>
 );
 
-const JaydevVarmaTemplate = ({ data }) => {
+const Template4 = ({ data }) => {
   const { personalInfo, summary, education, experience, projects, skills, sectionTitles } = data;
 
   return (
@@ -40,53 +40,49 @@ const JaydevVarmaTemplate = ({ data }) => {
       {/* Header */}
       <header className="jaydev-header">
         <h1 className="name">{personalInfo.fullName?.toUpperCase()}</h1>
-        <p className="tagline">{personalInfo.role || 'Software Engineer'}</p>
         
-        <div className="contact-grid">
-          {personalInfo.email && (
-            <a href={`mailto:${personalInfo.email}`} className="contact-item clickable">
-              <MailIcon size={14} className="icon" />
-              <span>{personalInfo.email}</span>
-            </a>
-          )}
-          {personalInfo.phone && (
-            <a href={`tel:${personalInfo.phone.replace(/[^0-9+]/g, '')}`} className="contact-item clickable">
-              <PhoneIcon size={14} className="icon" />
-              <span>{personalInfo.phone}</span>
-            </a>
-          )}
+        <div className="contact-info">
           {personalInfo.linkedin && (
-            <a 
-              href={personalInfo.linkedin.startsWith('http') ? personalInfo.linkedin : `https://${personalInfo.linkedin}`} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="contact-item clickable"
-            >
+            <a href={personalInfo.linkedin.startsWith('http') ? personalInfo.linkedin : `https://${personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="contact-item clickable">
               <LinkedinIcon size={14} className="icon" />
               <span>LinkedIn</span>
             </a>
           )}
           {personalInfo.github && (
-            <a 
-              href={personalInfo.github.startsWith('http') ? personalInfo.github : `https://${personalInfo.github}`} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="contact-item clickable"
-            >
-              <GithubIcon size={14} className="icon" />
-              <span>GitHub</span>
-            </a>
+            <>
+              {personalInfo.linkedin && <span className="pipe">|</span>}
+              <a href={personalInfo.github.startsWith('http') ? personalInfo.github : `https://${personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="contact-item clickable">
+                <GithubIcon size={14} className="icon" />
+                <span>GitHub</span>
+              </a>
+            </>
           )}
           {personalInfo.leetcode && (
-            <a 
-              href={personalInfo.leetcode.startsWith('http') ? personalInfo.leetcode : `https://${personalInfo.leetcode}`} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="contact-item clickable"
-            >
-              <LeetCodeIcon size={14} className="icon" />
-              <span>LeetCode</span>
-            </a>
+            <>
+              {(personalInfo.linkedin || personalInfo.github) && <span className="pipe">|</span>}
+              <a href={personalInfo.leetcode.startsWith('http') ? personalInfo.leetcode : `https://${personalInfo.leetcode}`} target="_blank" rel="noopener noreferrer" className="contact-item clickable">
+                <LeetCodeIcon size={14} className="icon" />
+                <span>LeetCode</span>
+              </a>
+            </>
+          )}
+          {personalInfo.phone && (
+            <>
+              {(personalInfo.linkedin || personalInfo.github || personalInfo.leetcode) && <span className="pipe">|</span>}
+              <a href={`tel:${personalInfo.phone.replace(/[^0-9+]/g, '')}`} className="contact-item clickable">
+                <PhoneIcon size={14} className="icon" />
+                <span>{personalInfo.phone}</span>
+              </a>
+            </>
+          )}
+          {personalInfo.email && (
+            <>
+              {(personalInfo.linkedin || personalInfo.github || personalInfo.leetcode || personalInfo.phone) && <span className="pipe">|</span>}
+              <a href={`mailto:${personalInfo.email}`} className="contact-item clickable">
+                <MailIcon size={14} className="icon" />
+                <span>{personalInfo.email}</span>
+              </a>
+            </>
           )}
         </div>
       </header>
@@ -161,6 +157,7 @@ const JaydevVarmaTemplate = ({ data }) => {
                 <p className="item-company">{edu.school}</p>
                 <p className="sidebar-meta">{edu.date}</p>
                 <p className="sidebar-meta">{edu.location}</p>
+                {edu.gpa && <p className="sidebar-meta" style={{ fontWeight: 'bold', marginTop: '2px' }}>{edu.gpa.includes('%') ? 'Percentage: ' : 'GPA: '}{edu.gpa}</p>}
                 {index < education.length - 1 && <div className="divider" />}
               </div>
             ))}
@@ -240,26 +237,37 @@ const JaydevVarmaTemplate = ({ data }) => {
           letter-spacing: 1px;
         }
 
-        .jaydev-container .contact-grid {
+        .jaydev-container .contact-info {
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
-          gap: 15px;
+          gap: 12px;
           margin-bottom: 20px;
+          align-items: center;
         }
 
         .jaydev-container .contact-item {
           display: flex;
           align-items: center;
           gap: 5px;
-          color: #444;
+          color: #004a99;
           text-decoration: none;
           font-size: 9pt;
           transition: color 0.2s;
         }
 
+        .jaydev-container .pipe {
+          color: #ccc;
+          user-select: none;
+        }
+
         .jaydev-container .contact-item.clickable:hover {
-          color: #000080;
+          color: #000;
+          text-decoration: underline;
+        }
+
+        .jaydev-container .icon {
+          color: #004a99;
         }
 
         .jaydev-container .main-content {
@@ -282,7 +290,7 @@ const JaydevVarmaTemplate = ({ data }) => {
         .jaydev-container .section-title {
           font-size: 14pt;
           font-weight: 900;
-          color: #000080;
+          color: #004a99;
           margin-bottom: 5px;
           letter-spacing: 1.5px;
         }
@@ -293,7 +301,7 @@ const JaydevVarmaTemplate = ({ data }) => {
 
         .jaydev-container .title-line {
           height: 2px;
-          background: #000080;
+          background: #004a99;
           margin-bottom: 12px;
           width: 100%;
         }
@@ -410,4 +418,4 @@ const JaydevVarmaTemplate = ({ data }) => {
   );
 };
 
-export default JaydevVarmaTemplate;
+export default Template4;

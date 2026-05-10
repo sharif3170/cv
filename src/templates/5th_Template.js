@@ -23,37 +23,60 @@ const LeetCodeIcon = ({ size = 14 }) => (
   </svg>
 );
 
-const TwoColumnTemplate = ({ data }) => {
+const Template5 = ({ data }) => {
   const { personalInfo, education, experience, projects, skills, sectionTitles, achievements } = data;
 
   return (
     <div id="resume-template" className="overleaf-container">
       {/* Header */}
       <header className="overleaf-header">
-        <h1 className="name">{personalInfo.fullName}</h1>
+        <h1 className="name">{personalInfo.fullName?.toUpperCase()}</h1>
+        {(personalInfo.email || personalInfo.phone || personalInfo.linkedin || personalInfo.github || personalInfo.leetcode) && (
         <div className="contact-row">
-          <a href={`mailto:${personalInfo.email}`} className="contact-btn">
-            <Mail size={14} /> <span>{personalInfo.email}</span>
-          </a>
-          <a href={`tel:${personalInfo.phone.replace(/[^0-9+]/g, '')}`} className="contact-btn">
-            <Phone size={14} /> <span>{personalInfo.phone}</span>
-          </a>
           {personalInfo.linkedin && (
             <a href={personalInfo.linkedin.startsWith('http') ? personalInfo.linkedin : `https://${personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="contact-btn">
-              <LinkedinIcon size={14} /> <span>LinkedIn</span>
+              <LinkedinIcon size={14} />
+              <span>LinkedIn</span>
             </a>
           )}
           {personalInfo.github && (
-            <a href={personalInfo.github.startsWith('http') ? personalInfo.github : `https://${personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="contact-btn">
-              <GithubIcon size={14} /> <span>GitHub</span>
-            </a>
+            <>
+              {personalInfo.linkedin && <span className="pipe">|</span>}
+              <a href={personalInfo.github.startsWith('http') ? personalInfo.github : `https://${personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="contact-btn">
+                <GithubIcon size={14} />
+                <span>GitHub</span>
+              </a>
+            </>
           )}
           {personalInfo.leetcode && (
-            <a href={personalInfo.leetcode.startsWith('http') ? personalInfo.leetcode : `https://${personalInfo.leetcode}`} target="_blank" rel="noopener noreferrer" className="contact-btn">
-              <LeetCodeIcon size={14} /> <span>LeetCode</span>
-            </a>
+            <>
+              {(personalInfo.linkedin || personalInfo.github) && <span className="pipe">|</span>}
+              <a href={personalInfo.leetcode.startsWith('http') ? personalInfo.leetcode : `https://${personalInfo.leetcode}`} target="_blank" rel="noopener noreferrer" className="contact-btn">
+                <LeetCodeIcon size={14} />
+                <span>LeetCode</span>
+              </a>
+            </>
+          )}
+          {personalInfo.phone && (
+            <>
+              {(personalInfo.linkedin || personalInfo.github || personalInfo.leetcode) && <span className="pipe">|</span>}
+              <a href={`tel:${personalInfo.phone.replace(/[^0-9+]/g, '')}`} className="contact-btn">
+                <Phone size={14} />
+                <span>{personalInfo.phone}</span>
+              </a>
+            </>
+          )}
+          {personalInfo.email && (
+            <>
+              {(personalInfo.linkedin || personalInfo.github || personalInfo.leetcode || personalInfo.phone) && <span className="pipe">|</span>}
+              <a href={`mailto:${personalInfo.email}`} className="contact-btn">
+                <Mail size={14} />
+                <span>{personalInfo.email}</span>
+              </a>
+            </>
           )}
         </div>
+        )}
       </header>
 
       <div className="content-grid">
@@ -89,6 +112,7 @@ const TwoColumnTemplate = ({ data }) => {
                     <p className="degree">{edu.degree}</p>
                     <p className="school">{edu.school}</p>
                     <p className="location">{edu.location}</p>
+                    {edu.gpa && <p className="location" style={{ fontWeight: '600', color: '#333' }}>{edu.gpa.includes('%') ? 'Percentage: ' : 'GPA: '}{edu.gpa}</p>}
                   </div>
                 </div>
               </div>
@@ -180,10 +204,13 @@ const TwoColumnTemplate = ({ data }) => {
         }
 
         .overleaf-header {
-          text-align: center;
+          text-align: center !important;
           margin-bottom: 25px;
-          border-bottom: 1px solid #eee;
           padding-bottom: 15px;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
 
         .name {
@@ -191,13 +218,18 @@ const TwoColumnTemplate = ({ data }) => {
           font-weight: 400;
           color: #333;
           margin: 0 0 10px 0;
+          text-align: center !important;
+          width: 100%;
+          display: block;
         }
 
         .contact-row {
           display: flex;
-          justify-content: center;
-          gap: 20px;
+          justify-content: center !important;
+          align-items: center;
+          gap: 12px;
           flex-wrap: wrap;
+          width: 100%;
         }
 
         .contact-btn {
@@ -205,13 +237,19 @@ const TwoColumnTemplate = ({ data }) => {
           align-items: center;
           gap: 6px;
           font-size: 10pt;
-          color: #444;
+          color: #004a99;
           text-decoration: none;
           transition: color 0.2s;
         }
 
+        .pipe {
+          color: #ccc;
+          user-select: none;
+        }
+
         .contact-btn:hover {
-          color: #9e3b33;
+          color: #000;
+          text-decoration: underline;
         }
 
         .content-grid {
@@ -228,7 +266,7 @@ const TwoColumnTemplate = ({ data }) => {
         .section-title {
           font-size: 13pt;
           font-weight: 700;
-          color: #9e3b33;
+          color: #000;
           margin: 0 0 2px 0;
           letter-spacing: 0.5px;
           text-transform: uppercase;
@@ -273,37 +311,47 @@ const TwoColumnTemplate = ({ data }) => {
         }
 
         .education-item {
-          margin-bottom: 12px;
+          margin-bottom: 15px;
         }
 
         .item-row {
           display: flex;
-          gap: 15px;
+          gap: 20px;
+          align-items: flex-start;
         }
 
         .date-col {
-          flex: 0 0 70px;
+          flex: 0 0 100px;
           font-size: 10pt;
           font-weight: 700;
+          color: #333;
+          text-align: left;
+        }
+
+        .info-col {
+          flex: 1;
+          text-align: left;
         }
 
         .degree {
           font-size: 11pt;
           font-weight: 700;
           margin: 0;
+          color: #000;
         }
 
         .school {
           font-size: 9.5pt;
-          text-transform: uppercase;
+          font-weight: 600;
           margin: 2px 0 1px 0;
-          color: #555;
+          color: #444;
         }
 
         .location {
           font-size: 9.5pt;
           font-style: italic;
           margin: 0;
+          color: #666;
         }
 
         .location-box {
@@ -321,7 +369,7 @@ const TwoColumnTemplate = ({ data }) => {
         }
 
         .contact-item .icon {
-          color: #9e3b33;
+          color: #000;
           width: 15px;
           text-align: center;
         }
@@ -375,4 +423,4 @@ const TwoColumnTemplate = ({ data }) => {
   );
 };
 
-export default TwoColumnTemplate;
+export default Template5;

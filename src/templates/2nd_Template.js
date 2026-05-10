@@ -22,7 +22,7 @@ const LeetCodeIcon = ({ size = 14 }) => (
   </svg>
 );
 
-const HarishbarTemplate = ({ data }) => {
+const Template2 = ({ data }) => {
   const { personalInfo, education, experience, projects, skills, summary, certifications, sectionTitles } = data;
 
   return (
@@ -31,24 +31,14 @@ const HarishbarTemplate = ({ data }) => {
       <header className="harishbar-header">
         <h1 className="name">{personalInfo.fullName}</h1>
         <div className="contact-info">
-          <a href={`tel:${personalInfo.phone.replace(/[^0-9+]/g, '')}`} className="contact-item link">
-            <Phone size={14} className="icon" /> {personalInfo.phone}
-          </a>
-          <span className="pipe">|</span>
-          <a href={`mailto:${personalInfo.email}`} className="contact-item link">
-            <Mail size={14} className="icon" /> {personalInfo.email}
-          </a>
           {personalInfo.linkedin && (
-            <>
-              <span className="pipe">|</span>
-              <a href={personalInfo.linkedin.startsWith('http') ? personalInfo.linkedin : `https://${personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="contact-item link">
-                <LinkedinIcon size={14} className="icon" /> LinkedIn
-              </a>
-            </>
+            <a href={personalInfo.linkedin.startsWith('http') ? personalInfo.linkedin : `https://${personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="contact-item link">
+              <LinkedinIcon size={14} className="icon" /> LinkedIn
+            </a>
           )}
           {personalInfo.github && (
             <>
-              <span className="pipe">|</span>
+              {personalInfo.linkedin && <span className="pipe">|</span>}
               <a href={personalInfo.github.startsWith('http') ? personalInfo.github : `https://${personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="contact-item link">
                 <GithubIcon size={14} className="icon" /> GitHub
               </a>
@@ -56,7 +46,7 @@ const HarishbarTemplate = ({ data }) => {
           )}
           {personalInfo.leetcode && (
             <>
-              <span className="pipe">|</span>
+              {(personalInfo.linkedin || personalInfo.github) && <span className="pipe">|</span>}
               <a href={personalInfo.leetcode.startsWith('http') ? personalInfo.leetcode : `https://${personalInfo.leetcode}`} target="_blank" rel="noopener noreferrer" className="contact-item link">
                 <LeetCodeIcon size={14} className="icon" /> LeetCode
               </a>
@@ -64,10 +54,26 @@ const HarishbarTemplate = ({ data }) => {
           )}
           {personalInfo.location && (
             <>
-              <span className="pipe">|</span>
+              {(personalInfo.linkedin || personalInfo.github || personalInfo.leetcode) && <span className="pipe">|</span>}
               <div className="contact-item">
                 <MapPin size={14} className="icon" /> {personalInfo.location}
               </div>
+            </>
+          )}
+          {personalInfo.phone && (
+            <>
+              {(personalInfo.linkedin || personalInfo.github || personalInfo.leetcode || personalInfo.location) && <span className="pipe">|</span>}
+              <a href={`tel:${personalInfo.phone.replace(/[^0-9+]/g, '')}`} className="contact-item link">
+                <Phone size={14} className="icon" /> {personalInfo.phone}
+              </a>
+            </>
+          )}
+          {personalInfo.email && (
+            <>
+              {(personalInfo.linkedin || personalInfo.github || personalInfo.leetcode || personalInfo.location || personalInfo.phone) && <span className="pipe">|</span>}
+              <a href={`mailto:${personalInfo.email}`} className="contact-item link">
+                <Mail size={14} className="icon" /> {personalInfo.email}
+              </a>
             </>
           )}
         </div>
@@ -133,6 +139,7 @@ const HarishbarTemplate = ({ data }) => {
               <span className="italic">{edu.degree}</span>
               <span className="date-loc">{edu.location}</span>
             </div>
+            {edu.gpa && <div className="italic" style={{ fontSize: '10pt', marginTop: '2px' }}>{edu.gpa.includes('%') ? 'Percentage: ' : 'GPA: '}{edu.gpa}</div>}
             {edu.bullets && edu.bullets.length > 0 && (
               <ul className="bullets">
                 {edu.bullets.map((bullet, i) => (
@@ -225,7 +232,7 @@ const HarishbarTemplate = ({ data }) => {
           align-items: center;
           gap: 6px;
           text-decoration: none;
-          color: inherit;
+          color: #004a99;
         }
 
         .harishbar-header .contact-item.link:hover {
@@ -234,7 +241,7 @@ const HarishbarTemplate = ({ data }) => {
         }
 
         .harishbar-header .icon {
-          color: #333 !important;
+          color: #004a99 !important;
         }
 
         .harishbar-header .pipe {
@@ -327,4 +334,4 @@ const HarishbarTemplate = ({ data }) => {
   );
 };
 
-export default HarishbarTemplate;
+export default Template2;
